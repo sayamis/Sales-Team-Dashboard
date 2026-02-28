@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from utils.access import get_user_access
 from utils.gsheets import get_gs_client, open_sheet_by_url_safe, worksheet_safe, get_all_values_safe
+from utils.ui import render_brand_header, render_page_title
 
 
 SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1uCHPSSdK4J4Ag-iXq-JkjDCQI8e5hM5OAZa7XUnJywg/edit"
@@ -134,7 +135,8 @@ def load_expense_data():
 # -----------------------------
 def show():
 
-    st.title("💰 Sales Expenses Dashboard")
+    render_brand_header()
+    render_page_title("Expenses Dashboard")
 
     if "user_email" not in st.session_state:
         st.warning("Please login first.")

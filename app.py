@@ -6,6 +6,9 @@ from utils.auth import ensure_google_login
 
 st.set_page_config(page_title="Dashboard", layout="wide")
 
+
+
+
 st.sidebar.title("📊 Dashboard")
 page = st.sidebar.radio("Navigate to", ["Sales", "Attendance", "Salary", "Expenses", "FA Sales"])
 

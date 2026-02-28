@@ -7,6 +7,7 @@ import math
 
 from utils.access import get_user_access, load_employee_list
 from utils.gsheets import get_gs_client, SPREADSHEET_URL
+from utils.ui import render_brand_header, render_page_title
 
 # =========================
 # CONFIG
@@ -685,7 +686,8 @@ def _render_metric_tab(df: pd.DataFrame, metric_col: str, metric_label: str):
 # MAIN
 # =========================
 def show():
-    st.markdown("## 📈 FA Sales Dashboard")
+    render_brand_header()
+    render_page_title("FA Sales Dashboard")
     st.markdown("<div class='small'>Net Value + Throughput Points + User-wise Summary</div>", unsafe_allow_html=True)
 
     email = st.session_state.get("user_email")

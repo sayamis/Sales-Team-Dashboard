@@ -6,7 +6,7 @@ from utils.gsheets import (
     open_sheet_by_url_safe, worksheet_safe, get_all_values_safe
 )
 from utils.access import get_user_access, load_employee_list
-
+from utils.ui import render_brand_header, render_page_title
 # =========================
 # CONFIG
 # =========================
@@ -195,7 +195,8 @@ def show():
     # =========================
     # HEADER
     # =========================
-    st.markdown('<div class="hdr"><h1>Salary Dashboard</h1></div>', unsafe_allow_html=True)
+    render_brand_header()
+    render_page_title("Salary Dashboard")
 
     # =========================
     # ONLY ONE FILTER: Month

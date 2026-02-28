@@ -10,12 +10,17 @@ from utils.charts import (
     top10_loss_chart, top10_loss_sku_by_type_chart,
     sku_customer_penetration_table
 )
+from utils.ui import render_brand_header, render_page_title
+
 
 REFRESH_MS = 300000  # 5 min
 
 
 def show():
-    st.title("📊 Sales Dashboard - Data Source : Primary Data (SAP Data)")
+    render_brand_header()  # logo + saya
+    render_page_title(
+        "📊 Sales Dashboard - Data Source : Primary Data (SAP Data)"
+    )
 
     # ✅ email already set by app.py (global login)
     email = st.session_state.get("user_email")

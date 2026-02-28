@@ -7,7 +7,7 @@ from utils.gsheets import (
     open_sheet_by_url_safe, worksheet_safe, get_all_values_safe
 )
 from utils.access import get_user_access, load_employee_list
-
+from utils.ui import render_brand_header, render_page_title
 # =========================
 # CONFIG
 # =========================
@@ -222,7 +222,8 @@ def apply_role_security(df: pd.DataFrame, access: dict) -> pd.DataFrame:
 # MAIN
 # =========================
 def show():
-    st.markdown("## 🗓️ Attendance Dashboard")
+    render_brand_header()
+    render_page_title("Attendance Dashboard")
     st.markdown("<div class='small'>Summary + Breakup view (same pattern as Expenses)</div>", unsafe_allow_html=True)
 
     # auth
