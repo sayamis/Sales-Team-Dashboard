@@ -1,16 +1,17 @@
 import streamlit as st
-from modules import sales, attendance, salary, expenses, fa_sales
 
-from utils.access import get_user_access
-from utils.auth import ensure_google_login
-
+# Must be the very first Streamlit call — before any module import that calls st.*
 st.set_page_config(page_title="Dashboard", layout="wide")
 
-
-
+from modules import sales, attendance, salary, expenses, fa_sales
+from utils.access import get_user_access
+from utils.auth import ensure_google_login
+from utils.ui import render_help_dialog
 
 st.sidebar.title("📊 Dashboard")
 page = st.sidebar.radio("Navigate to", ["Sales", "Attendance", "Salary", "Expenses", "FA Sales"])
+
+render_help_dialog()
 
 # ✅ Single global login (only here)
 email = ensure_google_login(get_user_access)
@@ -32,3 +33,7 @@ elif page == "Expenses":
     expenses.show()
 elif page == "FA Sales":    
     fa_sales.show()
+
+
+with st.sidebar.expander("ℹ️ Help / Guide", expanded=False):
+    st.write("...documentation...")

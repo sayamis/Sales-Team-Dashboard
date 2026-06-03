@@ -13,11 +13,7 @@ from utils.ui import render_brand_header, render_page_title
 SALARY_SHEET_NAME = "Salary"
 CACHE_TTL = 300  # seconds
 
-# =========================
-# UI STYLE (simple + clean)
-# =========================
-st.markdown(
-    """
+_SALARY_CSS = """
 <style>
 .stApp { background: #ffffff; }
 .hdr {
@@ -35,9 +31,7 @@ st.markdown(
 }
 .small { color:#6b7280; font-size:12px; }
 </style>
-""",
-    unsafe_allow_html=True,
-)
+"""
 
 # =========================
 # Helpers
@@ -195,6 +189,7 @@ def show():
     # =========================
     # HEADER
     # =========================
+    st.markdown(_SALARY_CSS, unsafe_allow_html=True)
     render_brand_header()
     render_page_title("Salary Dashboard")
 

@@ -14,12 +14,7 @@ from utils.ui import render_brand_header, render_page_title
 ATTENDANCE_SHEET_NAME = "Attendance"
 CACHE_TTL = 300  # seconds
 
-
-# =========================
-# UI STYLE (clean + professional)
-# =========================
-st.markdown(
-    """
+_ATTENDANCE_CSS = """
 <style>
 /* Base */
 .stApp { background: #ffffff; }
@@ -60,9 +55,7 @@ div[data-testid="metric-container"] div{
   overflow:hidden;
 }
 </style>
-""",
-    unsafe_allow_html=True,
-)
+"""
 
 # =========================
 # Helpers
@@ -222,6 +215,7 @@ def apply_role_security(df: pd.DataFrame, access: dict) -> pd.DataFrame:
 # MAIN
 # =========================
 def show():
+    st.markdown(_ATTENDANCE_CSS, unsafe_allow_html=True)
     render_brand_header()
     render_page_title("Attendance Dashboard")
     st.markdown("<div class='small'>Summary + Breakup view (same pattern as Expenses)</div>", unsafe_allow_html=True)

@@ -51,8 +51,6 @@ def fetch_df_smart(data_tab: str = "Orders", spreadsheet_url: str = SPREADSHEET_
     sh = open_sheet_by_url_safe(client, spreadsheet_url)
     ws = worksheet_safe(sh, data_tab)
     values = get_all_values_safe(ws)
-
-    values = ws.get_all_values()
     if not values:
         return pd.DataFrame()
 
@@ -112,7 +110,13 @@ def fetch_df_smart(data_tab: str = "Orders", spreadsheet_url: str = SPREADSHEET_
 
     data_rows = values[header_row_idx + 1:]
     out = []
-    max_needed = max(col_idx.values())
+    valid_indices = [v for v in col_idx.values() if v is not None]
+    max_needed = max(valid_indices) if valid_indices else 0
+
+    def _safe_get(r, idx):
+        if idx is None or idx >= len(r):
+            return ""
+        return r[idx]
 
     for r in data_rows:
         if not any(str(x).strip() for x in r):
@@ -121,15 +125,15 @@ def fetch_df_smart(data_tab: str = "Orders", spreadsheet_url: str = SPREADSHEET_
             r = r + [""] * (max_needed + 1 - len(r))
 
         out.append({
-            "Customer/Vendor Name": r[col_idx["Customer/Vendor Name"]],
-            "Item No.": r[col_idx["Item No."]],
-            "Total": r[col_idx["Total"]],
-            "State": r[col_idx["State"]],
-            "Dispatch": r[col_idx["Dispatch"]],
-            "Golden SKU": r[col_idx["Golden SKU"]],
-            "Throughput Value": r[col_idx["Throughput Value"]],
-            "Quantity": r[col_idx["Quantity"]],
-            "Date": r[col_idx["Date"]],
+            "Customer/Vendor Name": _safe_get(r, col_idx["Customer/Vendor Name"]),
+            "Item No.": _safe_get(r, col_idx["Item No."]),
+            "Total": _safe_get(r, col_idx["Total"]),
+            "State": _safe_get(r, col_idx["State"]),
+            "Dispatch": _safe_get(r, col_idx["Dispatch"]),
+            "Golden SKU": _safe_get(r, col_idx["Golden SKU"]),
+            "Throughput Value": _safe_get(r, col_idx["Throughput Value"]),
+            "Quantity": _safe_get(r, col_idx["Quantity"]),
+            "Date": _safe_get(r, col_idx["Date"]),
         })
 
     return pd.DataFrame(out)

@@ -15,12 +15,7 @@ from utils.ui import render_brand_header, render_page_title
 SHEET_NAME = "FA Sales Data"
 CACHE_TTL = 300  # seconds
 
-
-# =========================
-# UI (professional + readable)
-# =========================
-st.markdown(
-    """
+_FA_SALES_CSS = """
 <style>
 .stApp { background:#ffffff; }
 h1,h2,h3 { color:#0f172a; font-weight:800; }
@@ -56,9 +51,7 @@ div[data-testid="metric-container"] div{
   overflow:hidden;
 }
 </style>
-""",
-    unsafe_allow_html=True,
-)
+"""
 
 
 # =========================
@@ -686,6 +679,7 @@ def _render_metric_tab(df: pd.DataFrame, metric_col: str, metric_label: str):
 # MAIN
 # =========================
 def show():
+    st.markdown(_FA_SALES_CSS, unsafe_allow_html=True)
     render_brand_header()
     render_page_title("FA Sales Dashboard")
     st.markdown("<div class='small'>Net Value + Throughput Points + User-wise Summary</div>", unsafe_allow_html=True)

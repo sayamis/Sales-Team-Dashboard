@@ -80,3 +80,67 @@ def render_page_title(title: str, subtitle: str = ""):
     st.markdown(f'<div class="tppl-title">{title}</div>', unsafe_allow_html=True)
     if subtitle:
         st.markdown(f'<div class="tppl-sub">{subtitle}</div>', unsafe_allow_html=True)
+
+def render_help_dialog():
+    # Small fixed icon at top-right
+    st.markdown(
+        """
+        <style>
+        .help-fab {
+          position: fixed;
+          top: 14px;
+          right: 18px;
+          z-index: 100000;
+        }
+        .help-fab button {
+          border-radius: 999px !important;
+          padding: 6px 10px !important;
+          border: 1px solid rgba(0,0,0,.15) !important;
+          background: white !important;
+          cursor: pointer !important;
+          font-weight: 700 !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # We place an actual Streamlit button; style it via container position
+    with st.container():
+        st.markdown('<div class="help-fab">', unsafe_allow_html=True)
+        open_help = st.button("ℹ️", key="open_help_btn")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    if open_help:
+        _open_help_dialog()
+
+@st.dialog("Dashboard Guide")
+def _open_help_dialog():
+    st.markdown("### How to use this dashboard")
+    st.markdown(
+        """
+**1) Login**
+- Use Google login in the left sidebar.
+- If you don’t have access, contact admin.
+
+**2) Navigate**
+- Use the “Navigate to” options in sidebar to switch modules (Sales/Attendance/Salary/Expenses/FA Sales).
+
+**3) Filters**
+- Apply date range first.
+- Then select State / Customer / SKU filters (if available).
+- Use “Reset Filters” to clear.
+
+**4) Charts**
+- Hover on charts to see exact values.
+- Use legend to hide/show series.
+
+**5) Data refresh**
+- Dashboard auto-refreshes periodically.
+- If numbers look old, refresh page once.
+
+**6) Troubleshooting**
+- If you see “No rows after applying filters”: widen date range / clear filters.
+- If login fails: open in new tab and try again.
+        """
+    )

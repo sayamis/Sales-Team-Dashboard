@@ -11,42 +11,6 @@ def norm_yes(x) -> bool:
 def to_num(series):
     return pd.to_numeric(series, errors="coerce").fillna(0)
 
-# ============================
-# PLOTLY STYLE
-# ============================
-def apply_plot_style(fig: go.Figure, title: str):
-    fig.update_layout(
-        title=f"<b>{title}</b>",
-        height=520,
-        margin=dict(l=20, r=20, t=70, b=20),
-        font=dict(color="black", size=13),
-        legend=dict(font=dict(color="black", size=13)),
-    )
-    fig.update_xaxes(
-        tickfont=dict(color="black", size=12),
-        title_font=dict(color="black", size=13),
-        showgrid=False,
-    )
-    fig.update_yaxes(
-        tickfont=dict(color="black", size=12),
-        title_font=dict(color="black", size=13),
-        gridcolor="rgba(0,0,0,0.08)",
-        zerolinecolor="rgba(0,0,0,0.20)",
-    )
-    return fig
-
-# ---- keep your existing chart functions below (unchanged) ----
-# top10_stacked_chart
-# top10_sku_by_type_chart
-# top10_dispatched_mix_chart
-# top10_stacked_chart_qty
-# top10_sku_by_type_chart_qty
-# top10_loss_chart
-# top10_loss_sku_by_type_chart
-# sku_customer_penetration_table
-
-
-
 
 
 # ============================

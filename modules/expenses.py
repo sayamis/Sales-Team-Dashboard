@@ -8,11 +8,7 @@ from utils.ui import render_brand_header, render_page_title
 SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1uCHPSSdK4J4Ag-iXq-JkjDCQI8e5hM5OAZa7XUnJywg/edit"
 SHEET_NAME = "Sale Expenses"
 
-
-# -----------------------------
-# STRONG UI OVERRIDE
-# -----------------------------
-st.markdown("""
+_EXPENSES_CSS = """
 <style>
 
 /* ===== FORCE PURE BLACK TEXT ===== */
@@ -65,7 +61,7 @@ div[data-testid="metric-container"] div {
 }
 
 </style>
-""", unsafe_allow_html=True)
+"""
 
 
 
@@ -134,7 +130,7 @@ def load_expense_data():
 # Main Show Function
 # -----------------------------
 def show():
-
+    st.markdown(_EXPENSES_CSS, unsafe_allow_html=True)
     render_brand_header()
     render_page_title("Expenses Dashboard")
 
