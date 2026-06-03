@@ -237,7 +237,7 @@ def load_fa_sales_df():
             dayfirst=True
         )
         df = df[~dts.isna()].copy()
-        df[col_date] = dts.dt.date
+        df[col_date] = dts
 
     return df
 
@@ -748,7 +748,7 @@ def show():
     st.markdown("</div>", unsafe_allow_html=True)
 
     d1, d2 = _clamp_range(*st.session_state.fa_date_range)
-    df_f = df_sec[_safe_series(df_sec, col_date).between(d1, d2, inclusive="both")].copy()
+    df_f = df_sec[_safe_series(df_sec, col_date).between(pd.Timestamp(d1), pd.Timestamp(d2), inclusive="both")].copy()
     if df_f.empty:
         st.warning("No rows in selected date range.")
         st.stop()

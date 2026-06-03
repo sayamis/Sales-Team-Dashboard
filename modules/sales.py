@@ -147,7 +147,7 @@ def show():
     date_range = st.session_state.f_date
     if isinstance(date_range, tuple) and len(date_range) == 2 and date_range[0] and date_range[1]:
         d1, d2 = date_range
-        df_f = df_f[df_f["_date_parsed"].between(d1, d2, inclusive="both")]
+        df_f = df_f[df_f["_date_parsed"].between(pd.Timestamp(d1), pd.Timestamp(d2), inclusive="both")]
 
     if st.session_state.f_states:
         df_f = df_f[df_f["_state_raw"].isin(st.session_state.f_states)]

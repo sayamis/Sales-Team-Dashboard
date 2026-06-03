@@ -43,8 +43,7 @@ def normalize_state(s: str) -> str:
     return str(s).replace("\u00a0", " ").strip().lower()
 
 def to_date_series(s: pd.Series) -> pd.Series:
-    dt = pd.to_datetime(s.astype(str).str.strip(), errors="coerce", dayfirst=True)
-    return dt.dt.date
+    return pd.to_datetime(s.astype(str).str.strip(), errors="coerce", dayfirst=True)
 
 def fetch_df_smart(data_tab: str = "Orders", spreadsheet_url: str = SPREADSHEET_URL) -> pd.DataFrame:
     client = get_gs_client()

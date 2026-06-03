@@ -108,10 +108,9 @@ def load_expense_data():
         df["Date"] = pd.to_datetime(
             df["Date"],
             errors="coerce",
-            dayfirst=True   # 👈 THIS FIXES dd/mm/yyyy
+            dayfirst=True
         )
         df = df.dropna(subset=["Date"])
-        df["Date"] = df["Date"].dt.date
 
 
     numeric_cols = [
@@ -198,7 +197,7 @@ def show():
 
     # Apply filter
     if start_date and end_date:
-        df = df[(df["Date"] >= start_date) & (df["Date"] <= end_date)]
+        df = df[(df["Date"] >= pd.Timestamp(start_date)) & (df["Date"] <= pd.Timestamp(end_date))]
 
 
     # -----------------------------

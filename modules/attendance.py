@@ -146,7 +146,7 @@ def load_attendance_df():
     if col_date:
         dt = pd.to_datetime(df[col_date].astype(str).str.strip(), errors="coerce", dayfirst=True)
         df = df[~dt.isna()].copy()
-        df[col_date] = dt.dt.date
+        df[col_date] = dt
 
     # numeric
     col_tc = _find_col(df, ["TC"])
@@ -297,7 +297,7 @@ def show():
     if d2 < d1:
         d1, d2 = d2, d1
 
-    df_f = df_sec[df_sec[col_date].between(d1, d2, inclusive="both")].copy()
+    df_f = df_sec[df_sec[col_date].between(pd.Timestamp(d1), pd.Timestamp(d2), inclusive="both")].copy()
     if df_f.empty:
         st.warning("No rows in selected date range.")
         st.stop()
